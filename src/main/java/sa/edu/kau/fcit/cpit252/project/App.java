@@ -8,13 +8,13 @@ public class App {
         System.out.println("=== KAUBook - Factory Method Pattern ===\n");
 
         // --- Factory Method: create listings ---
-        createListing sellCreator = new sellListingCreator("CPIT-252", "Good", 45.0);
+        createListing sellCreator = new sellListingCreator("CPIT-252", Condition.GOOD, 45.0);
         Listing sellListing = sellCreator.submitListing();
 
-        createListing borrowCreator = new borrowListingCreator("MATH-101", "Fair", 7);
+        createListing borrowCreator = new borrowListingCreator("MATH-101", Condition.FAIR, 7);
         Listing borrowListing = borrowCreator.submitListing();
 
-        createListing exchangeCreator = new exchangeListingCreator("PHYS-110", "Excellent", "CHEM-101");
+        createListing exchangeCreator = new exchangeListingCreator("PHYS-110", Condition.NEW, "CHEM-101");
         Listing exchangeListing = exchangeCreator.submitListing();
 
         System.out.println("\n=== KAUBook - Decorator Pattern ===\n");

@@ -5,10 +5,10 @@ package sa.edu.kau.fcit.cpit252.project;
 
 public class borrowListingCreator extends createListing {
     private String courseCode;
-    private String condition;
+    private Condition condition;
     private int durationDays;
 
-    public borrowListingCreator(String courseCode, String condition, int durationDays) {
+    public borrowListingCreator(String courseCode, Condition condition, int durationDays) {
         this.courseCode = courseCode;
         this.condition = condition;
         this.durationDays = durationDays;

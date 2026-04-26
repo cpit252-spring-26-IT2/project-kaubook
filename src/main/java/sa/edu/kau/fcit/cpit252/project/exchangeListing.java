@@ -5,10 +5,10 @@ package sa.edu.kau.fcit.cpit252.project;
 
 public class exchangeListing implements Listing{
     private String courseCode;
-    private String condition;
+    private Condition condition;
     private String wantedCourseCode;
 
-    public exchangeListing(String courseCode, String condition, String wantedCourseCode){
+    public exchangeListing(String courseCode, Condition condition, String wantedCourseCode){
         this.courseCode = courseCode;
         this.condition = condition;
         this.wantedCourseCode = wantedCourseCode;
@@ -20,7 +20,7 @@ public class exchangeListing implements Listing{
     }
     @Override
     public String getCondition(){
-        return condition;
+        return condition.name();
     }
     @Override
     public String getType(){
@@ -32,6 +32,6 @@ public class exchangeListing implements Listing{
     }
     @Override
     public String getSummary(){
-        return "[EXCHANGE] "+ courseCode + " | Condition: " + condition + " | Wants: " + wantedCourseCode;
+        return "[EXCHANGE] "+ courseCode + " | Condition: " + condition.name() + " | Wants: " + wantedCourseCode;
     }
 }

@@ -5,10 +5,10 @@ package sa.edu.kau.fcit.cpit252.project;
 
 public class exchangeListingCreator extends createListing{
     private String courseCode;
-    private String condition;
+    private Condition condition;
     private String wantedCourseCode;
 
-    public exchangeListingCreator(String courseCode, String condition, String wantedCourseCode){
+    public exchangeListingCreator(String courseCode, Condition condition, String wantedCourseCode){
         this.courseCode = courseCode;
         this.condition = condition;
         this.wantedCourseCode = wantedCourseCode;

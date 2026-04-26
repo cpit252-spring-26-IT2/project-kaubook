@@ -5,10 +5,10 @@ package sa.edu.kau.fcit.cpit252.project;
 
 public class sellListing implements Listing{
     private String courseCode;
-    private String condition;
+    private Condition condition;
     private double price;
 
-    public sellListing(String courseCode, String condition, double price) {
+    public sellListing(String courseCode, Condition condition, double price) {
         this.courseCode = courseCode;
         this.condition = condition;
         this.price = price;
@@ -20,7 +20,7 @@ public class sellListing implements Listing{
     }
     @Override
     public String getCondition() {
-        return condition;
+        return condition.name();
     }
     @Override
     public String getType(){
@@ -32,6 +32,6 @@ public class sellListing implements Listing{
     }
     @Override
     public String getSummary() {
-        return "[SELL] "+courseCode+" | Condition: "+condition+" | Price: "+price + " SAR";
+        return "[SELL] "+courseCode+" | Condition: "+condition.name()+" | Price: "+price + " SAR";
     }
 }

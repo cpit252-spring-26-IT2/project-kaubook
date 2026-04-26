@@ -5,10 +5,10 @@ package sa.edu.kau.fcit.cpit252.project;
 
 public class sellListingCreator extends createListing{
     private String courseCode;
-    private String condition;
+    private Condition condition;
     private double price;
 
-    public sellListingCreator(String courseCode, String condition, double price)
+    public sellListingCreator(String courseCode, Condition condition, double price)
     {
         this.courseCode = courseCode;
         this.condition = condition;

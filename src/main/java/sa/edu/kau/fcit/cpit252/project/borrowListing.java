@@ -5,10 +5,10 @@ package sa.edu.kau.fcit.cpit252.project;
 
 public class borrowListing implements Listing{
     private String courseCode;
-    private String condition;
+    private Condition condition;
     private int durationDays;
 
-    public borrowListing(String courseCode, String condition, int durationDays) {
+    public borrowListing(String courseCode, Condition condition, int durationDays) {
         this.courseCode = courseCode;
         this.condition = condition;
         this.durationDays = durationDays;
@@ -20,7 +20,7 @@ public class borrowListing implements Listing{
     }
     @Override
     public String getCondition() {
-        return condition;
+        return condition.name();
     }
     @Override
     public String getType(){
@@ -32,6 +32,6 @@ public class borrowListing implements Listing{
     }
     @Override
     public String getSummary(){
-        return "[BORROW] "+ courseCode + " | Condition: " + condition + " | Duration: " + durationDays + " days";
+        return "[BORROW] "+ courseCode + " | Condition: " + condition.name() + " | Duration: " + durationDays + " days";
     }
 }
