@@ -11,10 +11,13 @@ public class urgentDecorator extends listingDecorator {
 
     @Override
     public double getPrice(){
+        if(getType().equals("EXCHANGE")){
+            return super.getPrice();
+        }
         return super.getPrice() + urgencyFee;
     }
     @Override
     public String getSummary(){
-        return "[URGENT]" + super.getSummary();
+        return "[URGENT] " + super.getSummary();
     }
 }
