@@ -1,6 +1,6 @@
 package sa.edu.kau.fcit.cpit252.project;
 
-// Structural Pattern - Decorator
+// Structural Design Pattern - Decorator
 
 public abstract class listingDecorator implements Listing {
 
