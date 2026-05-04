@@ -37,4 +37,5 @@ To build and run the app, use:
 ## License
 
 Copyright © KAUBook Team
+
 All rights reserved.
