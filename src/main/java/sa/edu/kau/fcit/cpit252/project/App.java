@@ -3,6 +3,10 @@ package sa.edu.kau.fcit.cpit252.project;
 /**
  * Hello world!
  */
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class App {
     public static void main(String[] args) {
         System.out.println("=== KAUBook - Factory Method Pattern ===\n");
@@ -37,5 +41,43 @@ public class App {
                 new verifiedDecorator(exchangeListing, "Sara", 4.8, 4.0));
         System.out.println("Urgent + Verified: " + urgentVerifiedExchange.getSummary());
         System.out.println("Price after urgency fee: " + urgentVerifiedExchange.getPrice() + " SAR");
+
+
+        // Stage 3: apply Strategy Pattern to sort listings
+        System.out.println("\n=== KAUBook - Strategy Pattern ===\n");
+
+        List<Listing> listings = new ArrayList<>();
+        listings.add(sellListing);
+        listings.add(borrowListing);
+        listings.add(exchangeListing);
+        listings.add(urgentSell);
+        listings.add(verifiedBorrow);
+        listings.add(urgentVerifiedExchange);
+
+        ListingManager manager = new ListingManager();
+
+        // Choose a sorting strategy at runtime
+        manager.setStrategy(new SortByPriceStrategy());
+        System.out.println("Sorted By Price:");
+        // Print listings after applying the selected sort strategy
+        printListings(manager.sortListings(listings));
+
+        System.out.println();
+
+        manager.setStrategy(new SortByTypeStrategy());
+        System.out.println("Sorted By Type:");
+        printListings(manager.sortListings(listings));
+
+        System.out.println();
+
+        manager.setStrategy(new SortByCourseCodeStrategy());
+        System.out.println("Sorted By Course Code:");
+        printListings(manager.sortListings(listings));
+    }
+
+    private static void printListings(List<Listing> listings) {
+        for (Listing listing : listings) {
+            System.out.println(listing.getSummary());
+        }
     }
 }
