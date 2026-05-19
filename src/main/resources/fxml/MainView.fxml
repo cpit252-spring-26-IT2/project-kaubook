@@ -5,18 +5,28 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="sa.edu.kau.fcit.cpit252.project.MainController"
-            prefWidth="900" prefHeight="620">
+            prefWidth="980" prefHeight="640">
 
     <top>
         <HBox spacing="12" alignment="CENTER_LEFT"
               style="-fx-background-color:#1a1a2e; -fx-padding:12 20;">
             <Label text="📚 KauBook"
-                   style="-fx-text-fill:white; -fx-font-size:18; -fx-font-weight:bold;"/>
+                   style="-fx-text-fill:white; -fx-font-size:18;
+                          -fx-font-weight:bold;"/>
             <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userLabel" text=""
+                   style="-fx-text-fill:#8888aa; -fx-font-size:13;"/>
+            <Label fx:id="roleLabel" text=""
+                   style="-fx-text-fill:#7F77DD; -fx-font-size:12;
+                          -fx-font-weight:bold;"/>
             <Label text="Sort by:" style="-fx-text-fill:#aaa; -fx-font-size:13;"/>
             <ComboBox fx:id="sortCombo"/>
-            <Button text="+ New Listing" fx:id="newBtn" onAction="#openCreateDialog"
+            <Button text="+ New Listing" onAction="#openCreateDialog"
                     style="-fx-background-color:#7F77DD; -fx-text-fill:white;
+                           -fx-background-radius:7; -fx-cursor:hand;"/>
+            <Button text="Logout" onAction="#logout"
+                    style="-fx-background-color:transparent; -fx-text-fill:#aaa;
+                           -fx-border-color:#444; -fx-border-radius:7;
                            -fx-background-radius:7; -fx-cursor:hand;"/>
         </HBox>
     </top>
@@ -27,14 +37,20 @@
                      -fx-border-color:#e0e2ea; -fx-border-width:0 1 0 0;
                      -fx-padding:20 12;">
             <Label text="FILTER BY TYPE"
-                   style="-fx-font-size:10; -fx-text-fill:#999; -fx-font-weight:bold;"/>
-            <Button text="All"        userData="ALL"      maxWidth="Infinity" onAction="#filterListings" styleClass="filter-btn"/>
-            <Button text="💰 Sell"    userData="SELL"     maxWidth="Infinity" onAction="#filterListings" styleClass="filter-btn"/>
-            <Button text="📚 Borrow"  userData="BORROW"   maxWidth="Infinity" onAction="#filterListings" styleClass="filter-btn"/>
-            <Button text="🔄 Exchange" userData="EXCHANGE" maxWidth="Infinity" onAction="#filterListings" styleClass="filter-btn"/>
+                   style="-fx-font-size:10; -fx-text-fill:#999;
+                          -fx-font-weight:bold;"/>
+            <Button text="All"         userData="ALL"      maxWidth="Infinity"
+                    onAction="#filterListings" styleClass="filter-btn"/>
+            <Button text="💰 Sell"     userData="SELL"     maxWidth="Infinity"
+                    onAction="#filterListings" styleClass="filter-btn"/>
+            <Button text="📚 Borrow"   userData="BORROW"   maxWidth="Infinity"
+                    onAction="#filterListings" styleClass="filter-btn"/>
+            <Button text="🔄 Exchange" userData="EXCHANGE" maxWidth="Infinity"
+                    onAction="#filterListings" styleClass="filter-btn"/>
             <Separator/>
             <Label text="STATS"
-                   style="-fx-font-size:10; -fx-text-fill:#999; -fx-font-weight:bold;"/>
+                   style="-fx-font-size:10; -fx-text-fill:#999;
+                          -fx-font-weight:bold;"/>
             <Label fx:id="totalLabel"    text="Total: 0"    style="-fx-font-size:13;"/>
             <Label fx:id="urgentLabel"   text="Urgent: 0"   style="-fx-font-size:13;"/>
             <Label fx:id="verifiedLabel" text="Verified: 0" style="-fx-font-size:13;"/>
@@ -42,14 +58,16 @@
     </left>
 
     <center>
-        <TableView fx:id="listingsTable" style="-fx-background-color:white;">
+        <TableView fx:id="listingsTable"
+                   style="-fx-background-color:white;">
             <columns>
-                <TableColumn fx:id="courseCol"    text="Course"    prefWidth="110"/>
-                <TableColumn fx:id="typeCol"      text="Type"      prefWidth="100"/>
-                <TableColumn fx:id="conditionCol" text="Condition" prefWidth="90"/>
-                <TableColumn fx:id="priceCol"     text="Price"     prefWidth="100"/>
-                <TableColumn fx:id="tagsCol"      text="Tags"      prefWidth="130"/>
-                <TableColumn fx:id="summaryCol"   text="Summary"   prefWidth="230"/>
+                <TableColumn fx:id="courseCol"    text="Course"    prefWidth="100"/>
+                <TableColumn fx:id="typeCol"      text="Type"      prefWidth="90"/>
+                <TableColumn fx:id="conditionCol" text="Condition" prefWidth="85"/>
+                <TableColumn fx:id="priceCol"     text="Price"     prefWidth="95"/>
+                <TableColumn fx:id="tagsCol"      text="Tags"      prefWidth="120"/>
+                <TableColumn fx:id="ownerCol"     text="Listed by" prefWidth="100"/>
+                <TableColumn fx:id="summaryCol"   text="Summary"   prefWidth="220"/>
             </columns>
         </TableView>
     </center>
@@ -59,9 +77,11 @@
               style="-fx-background-color:#f4f5f8;
                      -fx-border-color:#e0e2ea; -fx-border-width:1 0 0 0;
                      -fx-padding:8 20;">
-            <Label fx:id="statusLabel" text="Ready" style="-fx-font-size:12; -fx-text-fill:#666;"/>
+            <Label fx:id="statusLabel" text="Ready"
+                   style="-fx-font-size:12; -fx-text-fill:#666;"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button text="Remove Selected" onAction="#removeListing"
+            <Button fx:id="removeBtn" text="Remove Selected"
+                    onAction="#removeListing"
                     style="-fx-background-color:white; -fx-text-fill:#E24B4A;
                            -fx-border-color:#f7c1c1; -fx-border-radius:7;
                            -fx-background-radius:7; -fx-cursor:hand;"/>
