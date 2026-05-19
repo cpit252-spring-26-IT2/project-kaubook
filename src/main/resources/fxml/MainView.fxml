@@ -8,27 +8,57 @@
             prefWidth="980" prefHeight="640">
 
     <top>
-        <HBox spacing="12" alignment="CENTER_LEFT"
-              style="-fx-background-color:#1a1a2e; -fx-padding:12 20;">
-            <Label text="📚 KauBook"
-                   style="-fx-text-fill:white; -fx-font-size:18;
+        <VBox style="-fx-background-color:#1a1a2e;">
+            <HBox spacing="12" alignment="CENTER_LEFT"
+                  style="-fx-padding:12 20;">
+                <Label text="📚 KauBook"
+                       style="-fx-text-fill:white; -fx-font-size:18;
                           -fx-font-weight:bold;"/>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Label fx:id="userLabel" text=""
-                   style="-fx-text-fill:#8888aa; -fx-font-size:13;"/>
-            <Label fx:id="roleLabel" text=""
-                   style="-fx-text-fill:#7F77DD; -fx-font-size:12;
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="userLabel" text=""
+                       style="-fx-text-fill:#8888aa; -fx-font-size:13;"/>
+                <Label fx:id="roleLabel" text=""
+                       style="-fx-text-fill:#7F77DD; -fx-font-size:12;
                           -fx-font-weight:bold;"/>
-            <Label text="Sort by:" style="-fx-text-fill:#aaa; -fx-font-size:13;"/>
-            <ComboBox fx:id="sortCombo"/>
-            <Button text="+ New Listing" onAction="#openCreateDialog"
-                    style="-fx-background-color:#7F77DD; -fx-text-fill:white;
-                           -fx-background-radius:7; -fx-cursor:hand;"/>
-            <Button text="Logout" onAction="#logout"
-                    style="-fx-background-color:transparent; -fx-text-fill:#aaa;
-                           -fx-border-color:#444; -fx-border-radius:7;
-                           -fx-background-radius:7; -fx-cursor:hand;"/>
-        </HBox>
+                <Label text="Sort by:"
+                       style="-fx-text-fill:#aaa; -fx-font-size:13;"/>
+                <ComboBox fx:id="sortCombo"/>
+                <Button text="+ New Listing" onAction="#openCreateDialog"
+                        style="-fx-background-color:#7F77DD;
+                           -fx-text-fill:white;
+                           -fx-background-radius:7;
+                           -fx-cursor:hand;"/>
+                <Button text="Logout" onAction="#logout"
+                        style="-fx-background-color:transparent;
+                           -fx-text-fill:#aaa;
+                           -fx-border-color:#444;
+                           -fx-border-radius:7;
+                           -fx-background-radius:7;
+                           -fx-cursor:hand;"/>
+            </HBox>
+            <HBox spacing="8" alignment="CENTER_LEFT"
+                  style="-fx-padding:0 20 10 20;">
+                <TextField fx:id="searchField"
+                           promptText="Search by course code..."
+                           prefWidth="320"
+                           style="-fx-background-color:#2a2a3e;
+                              -fx-text-fill:white;
+                              -fx-prompt-text-fill:#666;
+                              -fx-background-radius:8;
+                              -fx-border-color:#3a3a5e;
+                              -fx-border-radius:8;
+                              -fx-padding:8 12;
+                              -fx-font-size:13;"/>
+                <Button text="Clear" onAction="#clearSearch"
+                        style="-fx-background-color:transparent;
+                           -fx-text-fill:#aaa;
+                           -fx-border-color:#444;
+                           -fx-border-radius:7;
+                           -fx-background-radius:7;
+                           -fx-cursor:hand;
+                           -fx-font-size:12;"/>
+            </HBox>
+        </VBox>
     </top>
 
     <left>
@@ -67,7 +97,7 @@
                 <TableColumn fx:id="priceCol"     text="Price"     prefWidth="95"/>
                 <TableColumn fx:id="tagsCol"      text="Tags"      prefWidth="120"/>
                 <TableColumn fx:id="ownerCol"     text="Listed by" prefWidth="100"/>
-                <TableColumn fx:id="summaryCol"   text="Summary"   prefWidth="220"/>
+                <TableColumn fx:id="summaryCol"   text="Summary"   prefWidth="900"/>
             </columns>
         </TableView>
     </center>

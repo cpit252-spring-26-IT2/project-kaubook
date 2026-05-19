@@ -55,7 +55,7 @@
 
         <VBox spacing="4" alignment="CENTER">
             <Label text="Demo accounts:" style="-fx-font-size:11; -fx-text-fill:#aaa;"/>
-            <Label text="admin / admin123  •  sara / sara123  •  ahmed / ahmed123"
+            <Label text="admin / admin123  •  Ali / Ali123  •  Mohammed / Mohammed123"
                    style="-fx-font-size:11; -fx-text-fill:#bbb;"/>
         </VBox>
 

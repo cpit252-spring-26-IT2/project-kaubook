@@ -33,7 +33,7 @@ public abstract class listingDecorator implements Listing {
     public Listing getWrapped() {
         return listing;
     }
-    
+
     @Override
     public String getSummary(){
 

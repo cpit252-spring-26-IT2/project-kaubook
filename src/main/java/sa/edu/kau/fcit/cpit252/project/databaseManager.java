@@ -32,14 +32,9 @@ public class databaseManager {
     public List<Listing> getListings(){
         return listings;
     }
-    public void removeListing(String courseID){
-
-        for(Listing listing : listings){
-            if (courseID.equals(listing.getCourseCode())){
-                listings.remove(listing);
-            }
+    public void removeListing(Listing listing){
+        listings.remove(listing);
         }
-    }
 
     // ── Users & Auth ────────────────────────────────────────────────
     public User login(String username, String password){
