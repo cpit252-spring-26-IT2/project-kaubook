@@ -5,14 +5,20 @@ import java.util.List;
 
 public class databaseManager {
     private static databaseManager instance;
-    private List<String> students;
+    private List<User> users;
     private List<Listing> listings;
+    private User loggedUser;
    // private List<String> requests;
 
     private databaseManager (){
-        students = new ArrayList<>();
+        users = new ArrayList<>();
         listings = new ArrayList<>();
       //  requests = new ArrayList<>();
+
+        // default accounts
+        users.add(new User("admin", "admin123", true));
+        users.add(new User("Ali",  "Ali123",  false));
+        users.add(new User("Mohammed", "Mohammed123", false));
     }
     public static databaseManager getInstance(){
         if(instance == null){
@@ -34,10 +40,25 @@ public class databaseManager {
             }
         }
     }
-    public void addStudent(String student){
-        students.add(student);
+
+    // ── Users & Auth ────────────────────────────────────────────────
+    public User login(String username, String password){
+        for(User user : users){
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)){
+                loggedUser = user;
+                return loggedUser;
+            }
+        }
+        return null; // wrong credentials
     }
-    public List<String> getStudent(){
-        return students;
+
+    public User getLoggedUser(){
+        return loggedUser;
     }
+
+    public void logout(){
+        loggedUser = null;
+    }
+
+
 }
