@@ -29,6 +29,11 @@ public abstract class listingDecorator implements Listing {
 
         return listing.getPrice();
     }
+
+    public Listing getWrapped() {
+        return listing;
+    }
+    
     @Override
     public String getSummary(){
 
