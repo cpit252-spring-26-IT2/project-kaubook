@@ -1,0 +1,11 @@
+.filter-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: #ddd;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+}
+.filter-btn:hover {
+    -fx-background-color: #e8eaf0;
+}
