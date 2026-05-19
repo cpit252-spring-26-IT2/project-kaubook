@@ -16,7 +16,7 @@ public class User {
 
     public String  getPassword() {
         return password; }
-    
+
     public boolean isAdmin()     {
         return isAdmin; }
 }
