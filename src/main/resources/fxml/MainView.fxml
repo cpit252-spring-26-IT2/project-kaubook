@@ -5,116 +5,137 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="sa.edu.kau.fcit.cpit252.project.MainController"
-            prefWidth="980" prefHeight="640">
+            prefWidth="1100"
+            prefHeight="680"
+            styleClass="main-root">
 
     <top>
-        <VBox style="-fx-background-color:#1a1a2e;">
-            <HBox spacing="12" alignment="CENTER_LEFT"
-                  style="-fx-padding:12 20;">
-                <Label text="📚 KauBook"
-                       style="-fx-text-fill:white; -fx-font-size:18;
-                          -fx-font-weight:bold;"/>
+        <VBox styleClass="top-bar">
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="📚 KauBook" styleClass="brand-title"/>
                 <Region HBox.hgrow="ALWAYS"/>
-                <Label fx:id="userLabel" text=""
-                       style="-fx-text-fill:#8888aa; -fx-font-size:13;"/>
-                <Label fx:id="roleLabel" text=""
-                       style="-fx-text-fill:#7F77DD; -fx-font-size:12;
-                          -fx-font-weight:bold;"/>
-                <Label text="Sort by:"
-                       style="-fx-text-fill:#aaa; -fx-font-size:13;"/>
-                <ComboBox fx:id="sortCombo"/>
-                <Button text="+ New Listing" onAction="#openCreateDialog"
-                        style="-fx-background-color:#7F77DD;
-                           -fx-text-fill:white;
-                           -fx-background-radius:7;
-                           -fx-cursor:hand;"/>
-                <Button text="Logout" onAction="#logout"
-                        style="-fx-background-color:transparent;
-                           -fx-text-fill:#aaa;
-                           -fx-border-color:#444;
-                           -fx-border-radius:7;
-                           -fx-background-radius:7;
-                           -fx-cursor:hand;"/>
+
+                <Label fx:id="userLabel" text="" styleClass="user-label"/>
+                <Label fx:id="roleLabel" text="" styleClass="role-label"/>
+
+                <Label text="Sort by:" styleClass="top-label"/>
+                <ComboBox fx:id="sortCombo" styleClass="top-combo"/>
+
+                <Button text="+ New Listing"
+                        onAction="#openCreateDialog"
+                        styleClass="top-primary-btn"/>
+
+                <Button text="Logout"
+                        onAction="#logout"
+                        styleClass="top-outline-btn"/>
             </HBox>
-            <HBox spacing="8" alignment="CENTER_LEFT"
-                  style="-fx-padding:0 20 10 20;">
+
+            <HBox spacing="8" alignment="CENTER_LEFT" styleClass="search-bar">
                 <TextField fx:id="searchField"
                            promptText="Search by course code..."
                            prefWidth="320"
-                           style="-fx-background-color:#2a2a3e;
-                              -fx-text-fill:white;
-                              -fx-prompt-text-fill:#666;
-                              -fx-background-radius:8;
-                              -fx-border-color:#3a3a5e;
-                              -fx-border-radius:8;
-                              -fx-padding:8 12;
-                              -fx-font-size:13;"/>
-                <Button text="Clear" onAction="#clearSearch"
-                        style="-fx-background-color:transparent;
-                           -fx-text-fill:#aaa;
-                           -fx-border-color:#444;
-                           -fx-border-radius:7;
-                           -fx-background-radius:7;
-                           -fx-cursor:hand;
-                           -fx-font-size:12;"/>
+                           styleClass="search-field"/>
+                <Button text="Clear"
+                        onAction="#clearSearch"
+                        styleClass="clear-btn"/>
             </HBox>
         </VBox>
     </top>
 
     <left>
-        <VBox spacing="8" prefWidth="160"
-              style="-fx-background-color:#f4f5f8;
-                     -fx-border-color:#e0e2ea; -fx-border-width:0 1 0 0;
-                     -fx-padding:20 12;">
-            <Label text="FILTER BY TYPE"
-                   style="-fx-font-size:10; -fx-text-fill:#999;
-                          -fx-font-weight:bold;"/>
-            <Button text="All"         userData="ALL"      maxWidth="Infinity"
-                    onAction="#filterListings" styleClass="filter-btn"/>
-            <Button text="💰 Sell"     userData="SELL"     maxWidth="Infinity"
-                    onAction="#filterListings" styleClass="filter-btn"/>
-            <Button text="📚 Borrow"   userData="BORROW"   maxWidth="Infinity"
-                    onAction="#filterListings" styleClass="filter-btn"/>
-            <Button text="🔄 Exchange" userData="EXCHANGE" maxWidth="Infinity"
-                    onAction="#filterListings" styleClass="filter-btn"/>
+        <VBox spacing="12" prefWidth="190" styleClass="side-panel">
+            <Label text="FILTER BY TYPE" styleClass="side-heading"/>
+
+            <Button text="All"
+                    userData="ALL"
+                    maxWidth="Infinity"
+                    onAction="#filterListings"
+                    styleClass="filter-btn"/>
+
+            <Button text="💰 Sell"
+                    userData="SELL"
+                    maxWidth="Infinity"
+                    onAction="#filterListings"
+                    styleClass="filter-btn"/>
+
+            <Button text="📚 Borrow"
+                    userData="BORROW"
+                    maxWidth="Infinity"
+                    onAction="#filterListings"
+                    styleClass="filter-btn"/>
+
+            <Button text="🔄 Exchange"
+                    userData="EXCHANGE"
+                    maxWidth="Infinity"
+                    onAction="#filterListings"
+                    styleClass="filter-btn"/>
+
             <Separator/>
-            <Label text="STATS"
-                   style="-fx-font-size:10; -fx-text-fill:#999;
-                          -fx-font-weight:bold;"/>
-            <Label fx:id="totalLabel"    text="Total: 0"    style="-fx-font-size:13;"/>
-            <Label fx:id="urgentLabel"   text="Urgent: 0"   style="-fx-font-size:13;"/>
-            <Label fx:id="verifiedLabel" text="Verified: 0" style="-fx-font-size:13;"/>
+
+            <Label text="STATS" styleClass="side-heading"/>
+
+            <VBox spacing="10">
+                <VBox spacing="4" styleClass="stat-card">
+                    <Label text="Total Listings" styleClass="stat-title"/>
+                    <Label fx:id="totalLabel" text="0" styleClass="stat-value"/>
+                </VBox>
+
+                <VBox spacing="4" styleClass="stat-card">
+                    <Label text="Urgent" styleClass="stat-title"/>
+                    <Label fx:id="urgentLabel" text="0" styleClass="stat-value"/>
+                </VBox>
+
+                <VBox spacing="4" styleClass="stat-card">
+                    <Label text="Verified" styleClass="stat-title"/>
+                    <Label fx:id="verifiedLabel" text="0" styleClass="stat-value"/>
+                </VBox>
+            </VBox>
         </VBox>
     </left>
 
     <center>
-        <TableView fx:id="listingsTable"
-                   style="-fx-background-color:white;">
-            <columns>
-                <TableColumn fx:id="courseCol"    text="Course"    prefWidth="100"/>
-                <TableColumn fx:id="typeCol"      text="Type"      prefWidth="90"/>
-                <TableColumn fx:id="conditionCol" text="Condition" prefWidth="85"/>
-                <TableColumn fx:id="priceCol"     text="Price"     prefWidth="95"/>
-                <TableColumn fx:id="tagsCol"      text="Tags"      prefWidth="120"/>
-                <TableColumn fx:id="ownerCol"     text="Listed by" prefWidth="100"/>
-                <TableColumn fx:id="summaryCol"   text="Summary"   prefWidth="900"/>
-            </columns>
-        </TableView>
+        <VBox spacing="12" styleClass="content-wrap">
+            <VBox spacing="8" styleClass="table-card" VBox.vgrow="ALWAYS">
+                <Label text="Available Listings" styleClass="section-main-title"/>
+                <Label text="Browse, sort, and manage course book listings in one place."
+                       styleClass="section-subtitle"/>
+
+                <TableView fx:id="listingsTable" styleClass="listings-table" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="courseCol" text="Course" prefWidth="110"/>
+                        <TableColumn fx:id="typeCol" text="Type" prefWidth="100"/>
+                        <TableColumn fx:id="conditionCol" text="Condition" prefWidth="95"/>
+                        <TableColumn fx:id="priceCol" text="Price" prefWidth="100"/>
+                        <TableColumn fx:id="tagsCol" text="Tags" prefWidth="130"/>
+                        <TableColumn fx:id="ownerCol" text="Listed by" prefWidth="110"/>
+                        <TableColumn fx:id="summaryCol" text="Summary" prefWidth="720"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
     </center>
 
     <bottom>
-        <HBox spacing="16" alignment="CENTER_LEFT"
-              style="-fx-background-color:#f4f5f8;
-                     -fx-border-color:#e0e2ea; -fx-border-width:1 0 0 0;
-                     -fx-padding:8 20;">
-            <Label fx:id="statusLabel" text="Ready"
-                   style="-fx-font-size:12; -fx-text-fill:#666;"/>
+        <HBox spacing="16" alignment="CENTER_LEFT" styleClass="bottom-bar">
+            <Label fx:id="statusLabel" text="Ready" styleClass="status-label"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button fx:id="removeBtn" text="Remove Selected"
+            <Button fx:id="removeBtn"
+                    text="Remove Selected"
                     onAction="#removeListing"
-                    style="-fx-background-color:white; -fx-text-fill:#E24B4A;
-                           -fx-border-color:#f7c1c1; -fx-border-radius:7;
-                           -fx-background-radius:7; -fx-cursor:hand;"/>
+                    styleClass="danger-btn"/>
+            <Button text="Request Selected"
+                    onAction="#requestSelectedListing"
+                    styleClass="top-primary-btn"/>
+
+            <Button text="Review Requests"
+                    onAction="#reviewMyRequests"
+                    styleClass="review-btn"/>
+
+            <Button text="My Requests"
+                    onAction="#viewMyRequests"
+                    styleClass="my-requests-btn"/>
+
+
         </HBox>
     </bottom>
 

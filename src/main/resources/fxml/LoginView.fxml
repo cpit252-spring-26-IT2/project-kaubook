@@ -5,59 +5,57 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="sa.edu.kau.fcit.cpit252.project.LoginController"
-      alignment="CENTER" spacing="0"
-      style="-fx-background-color:#1a1a2e;"
-      prefWidth="420" prefHeight="520">
+      alignment="CENTER"
+      spacing="0"
+      prefWidth="420"
+      prefHeight="520"
+      styleClass="login-root">
 
-    <!-- Logo area -->
-    <VBox alignment="CENTER" spacing="8" style="-fx-padding:0 0 32 0;">
-        <Label text="📚"     style="-fx-font-size:52;"/>
-        <Label text="KauBook" style="-fx-font-size:28; -fx-font-weight:bold;
-                                     -fx-text-fill:white;"/>
-        <Label text="University Books &amp; Notes Exchange"
-               style="-fx-font-size:13; -fx-text-fill:#8888aa;"/>
+    <VBox alignment="CENTER" spacing="8" style="-fx-padding: 0 0 30 0;">
+        <Label text="📚" styleClass="login-brand-icon"/>
+        <Label text="KauBook" styleClass="login-brand-title"/>
+        <Label text="University Books &amp; Notes Exchange" styleClass="login-brand-subtitle"/>
     </VBox>
 
-    <!-- Login card -->
-    <VBox spacing="14" alignment="CENTER"
-          style="-fx-background-color:white; -fx-background-radius:16;
-                 -fx-padding:32 36; -fx-pref-width:320;">
+    <VBox spacing="14"
+          alignment="CENTER"
+          styleClass="login-card">
 
-        <Label text="Sign in to your account"
-               style="-fx-font-size:15; -fx-font-weight:bold; -fx-text-fill:#1a1a2e;"/>
+        <Label text="Sign in to your account" styleClass="login-title"/>
 
-        <VBox spacing="4">
-            <Label text="Username" style="-fx-font-size:11; -fx-text-fill:#888;"/>
-            <TextField fx:id="usernameField" promptText="Enter username"
-                       style="-fx-pref-height:38; -fx-background-radius:8;
-                              -fx-border-color:#e0e2ea; -fx-border-radius:8;
-                              -fx-padding:0 12;"/>
+        <VBox spacing="5" maxWidth="Infinity">
+            <Label text="Username" styleClass="field-label"/>
+            <TextField fx:id="usernameField"
+                       promptText="Enter username"
+                       maxWidth="Infinity"
+                       styleClass="modern-input"/>
         </VBox>
 
-        <VBox spacing="4">
-            <Label text="Password" style="-fx-font-size:11; -fx-text-fill:#888;"/>
-            <PasswordField fx:id="passwordField" promptText="Enter password"
-                           style="-fx-pref-height:38; -fx-background-radius:8;
-                                  -fx-border-color:#e0e2ea; -fx-border-radius:8;
-                                  -fx-padding:0 12;"/>
+        <VBox spacing="5" maxWidth="Infinity">
+            <Label text="Password" styleClass="field-label"/>
+            <PasswordField fx:id="passwordField"
+                           promptText="Enter password"
+                           maxWidth="Infinity"
+                           styleClass="modern-input"/>
         </VBox>
 
-        <Label fx:id="errorLabel" text=""
-               style="-fx-text-fill:#E24B4A; -fx-font-size:12;"/>
+        <Label fx:id="errorLabel" text="" styleClass="error-label"/>
 
-        <Button text="Sign In" onAction="#handleLogin" maxWidth="Infinity"
-                style="-fx-background-color:#1a1a2e; -fx-text-fill:white;
-                       -fx-font-size:14; -fx-font-weight:bold;
-                       -fx-background-radius:8; -fx-pref-height:40;
-                       -fx-cursor:hand;"/>
+        <Button text="Sign In"
+                onAction="#handleLogin"
+                maxWidth="Infinity"
+                styleClass="primary-btn"/>
 
         <Separator/>
 
         <VBox spacing="4" alignment="CENTER">
-            <Label text="Demo accounts:" style="-fx-font-size:11; -fx-text-fill:#aaa;"/>
+            <Label text="Demo accounts:" styleClass="hint-label"/>
             <Label text="admin / admin123  •  Ali / Ali123  •  Mohammed / Mohammed123"
-                   style="-fx-font-size:11; -fx-text-fill:#bbb;"/>
+                   wrapText="true"
+                   textAlignment="CENTER"
+                   styleClass="hint-label-muted"/>
         </VBox>
+
 
     </VBox>
 

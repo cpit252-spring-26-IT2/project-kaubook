@@ -92,44 +92,87 @@ public class MainController implements Initializable {
         dialog.setTitle("New Listing");
         dialog.setHeaderText("Fill in the listing details");
 
+        dialog.getDialogPane().getStyleClass().add("modern-dialog");
+        dialog.getDialogPane().getStylesheets().add(
+                getClass().getResource("/css/style.css").toExternalForm()
+        );
+
         ComboBox<String> typeBox = new ComboBox<>(
-                FXCollections.observableArrayList("SELL", "BORROW", "EXCHANGE"));
+                FXCollections.observableArrayList("SELL", "BORROW", "EXCHANGE")
+        );
         typeBox.setValue("SELL");
+
         TextField courseField = new TextField();
         courseField.setPromptText("e.g. CPIT-252");
+
         ComboBox<String> condBox = new ComboBox<>(
-                FXCollections.observableArrayList("NEW", "GOOD", "FAIR"));
+                FXCollections.observableArrayList("NEW", "GOOD", "FAIR")
+        );
         condBox.setValue("GOOD");
+
         TextField extraField = new TextField();
         extraField.setPromptText("Price / Days / Wanted course");
-        CheckBox urgentCheck   = new CheckBox("🔥 Urgent (+5 SAR)");
+
+        CheckBox urgentCheck = new CheckBox("🔥 Urgent (+5 SAR)");
         CheckBox verifiedCheck = new CheckBox("✓ Verified");
+
         TextField verifierField = new TextField();
         verifierField.setPromptText("Verifier name");
+
         TextField ratingField = new TextField();
         ratingField.setPromptText("Rating 0-5");
 
+        typeBox.getStyleClass().add("dialog-input");
+        courseField.getStyleClass().add("dialog-input");
+        condBox.getStyleClass().add("dialog-input");
+        extraField.getStyleClass().add("dialog-input");
+        verifierField.getStyleClass().add("dialog-input");
+        ratingField.getStyleClass().add("dialog-input");
+
+        urgentCheck.getStyleClass().add("dialog-check");
+        verifiedCheck.getStyleClass().add("dialog-check");
+
+        Label typeLabel = new Label("Type:");
+        Label courseLabel = new Label("Course:");
+        Label conditionLabel = new Label("Condition:");
+        Label extraLabel = new Label("Extra:");
+        Label verifierLabel = new Label("Verifier:");
+        Label ratingLabel = new Label("Rating:");
+        Label noteLabel = new Label("For SELL enter price, for BORROW enter days, for EXCHANGE enter wanted course.");
+
+        typeLabel.getStyleClass().add("dialog-label");
+        courseLabel.getStyleClass().add("dialog-label");
+        conditionLabel.getStyleClass().add("dialog-label");
+        extraLabel.getStyleClass().add("dialog-label");
+        verifierLabel.getStyleClass().add("dialog-label");
+        ratingLabel.getStyleClass().add("dialog-label");
+        noteLabel.getStyleClass().add("dialog-note");
+
         GridPane grid = new GridPane();
-        grid.setHgap(10); grid.setVgap(10);
-        grid.addRow(0, new Label("Type:"),      typeBox);
-        grid.addRow(1, new Label("Course:"),    courseField);
-        grid.addRow(2, new Label("Condition:"), condBox);
-        grid.addRow(3, new Label("Extra:"),     extraField);
-        grid.addRow(4, urgentCheck,             verifiedCheck);
-        grid.addRow(5, new Label("Verifier:"),  verifierField);
-        grid.addRow(6, new Label("Rating:"),    ratingField);
+        grid.getStyleClass().add("dialog-content");
+        grid.setHgap(12);
+        grid.setVgap(12);
+
+        grid.addRow(0, typeLabel, typeBox);
+        grid.addRow(1, courseLabel, courseField);
+        grid.addRow(2, conditionLabel, condBox);
+        grid.addRow(3, extraLabel, extraField);
+        grid.addRow(4, urgentCheck, verifiedCheck);
+        grid.addRow(5, verifierLabel, verifierField);
+        grid.addRow(6, ratingLabel, ratingField);
+        grid.add(noteLabel, 0, 7, 2, 1);
 
         dialog.getDialogPane().setContent(grid);
-        dialog.getDialogPane().getButtonTypes()
-                .addAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
         dialog.setResultConverter(btn -> {
             if (btn != ButtonType.OK) return null;
+
             try {
-                String    type   = typeBox.getValue();
-                String    course = courseField.getText().trim().toUpperCase();
-                Condition cond   = Condition.valueOf(condBox.getValue());
-                Listing   listing;
+                String type = typeBox.getValue();
+                String course = courseField.getText().trim().toUpperCase();
+                Condition cond = Condition.valueOf(condBox.getValue());
+                Listing listing;
 
                 switch (type) {
                     case "SELL" ->
@@ -137,11 +180,13 @@ public class MainController implements Initializable {
                                     course, cond,
                                     Double.parseDouble(extraField.getText())
                             ).submitListing();
+
                     case "BORROW" ->
                             listing = new borrowListingCreator(
                                     course, cond,
                                     Integer.parseInt(extraField.getText())
                             ).submitListing();
+
                     default ->
                             listing = new exchangeListingCreator(
                                     course, cond,
@@ -149,16 +194,20 @@ public class MainController implements Initializable {
                             ).submitListing();
                 }
 
-                if (verifiedCheck.isSelected())
-                    listing = new verifiedDecorator(listing,
+                if (verifiedCheck.isSelected()) {
+                    listing = new verifiedDecorator(
+                            listing,
                             verifierField.getText(),
-                            Double.parseDouble(ratingField.getText()), 4.0);
+                            Double.parseDouble(ratingField.getText()),
+                            4.0
+                    );
+                }
 
-                if (urgentCheck.isSelected())
+                if (urgentCheck.isSelected()) {
                     listing = new urgentDecorator(listing);
+                }
 
-                return new OwnedListing(listing,
-                        db.getLoggedUser().getUsername());
+                return new OwnedListing(listing, db.getLoggedUser().getUsername());
 
             } catch (Exception ex) {
                 new Alert(Alert.AlertType.ERROR,
@@ -270,5 +319,180 @@ public class MainController implements Initializable {
             cur = d.getWrapped();
         }
         return false;
+    }
+
+    @FXML
+    private void requestSelectedListing() {
+        ListingRow selected = listingsTable.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            statusLabel.setText("Select a listing first.");
+            return;
+        }
+
+        User current = db.getLoggedUser();
+        if (current == null) {
+            statusLabel.setText("No logged in user.");
+            return;
+        }
+
+        if (selected.getOwner().equals(current.getUsername())) {
+            statusLabel.setText("You cannot request your own listing.");
+            return;
+        }
+
+        ListingRequest request = new ListingRequest(
+                selected.getOriginalListing(),
+                selected.getOwner(),
+                current.getUsername()
+        );
+
+        db.addRequest(request);
+        statusLabel.setText("Request sent successfully.");
+    }
+    @FXML
+    private void reviewMyRequests() {
+        User current = db.getLoggedUser();
+
+        if (current == null) {
+            statusLabel.setText("No logged in user.");
+            return;
+        }
+
+        java.util.List<ListingRequest> myRequests = db.getRequestsForOwner(current.getUsername());
+
+        if (myRequests.isEmpty()) {
+            statusLabel.setText("No requests for your listings.");
+            return;
+        }
+
+        ChoiceDialog<ListingRequest> dialog = new ChoiceDialog<>(myRequests.get(0), myRequests);
+        dialog.setTitle("Review Requests");
+        dialog.setHeaderText("Select a request");
+        dialog.setContentText("Requests:");
+
+        dialog.showAndWait().ifPresent(request -> {
+            if (request.getStatus() != RequestStatus.PENDING) {
+                statusLabel.setText("This request was already processed.");
+                return;
+            }
+
+            Alert decision = new Alert(Alert.AlertType.CONFIRMATION);
+            decision.setTitle("Approve or Reject");
+            decision.setHeaderText("Requester: " + request.getRequesterUsername());
+            decision.setContentText(request.getListing().getSummary());
+
+            ButtonType approveBtn = new ButtonType("Approve");
+            ButtonType rejectBtn = new ButtonType("Reject");
+            ButtonType cancelBtn = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            decision.getButtonTypes().setAll(approveBtn, rejectBtn, cancelBtn);
+
+            decision.showAndWait().ifPresent(choice -> {
+                if (choice == approveBtn) {
+                    Dialog<ButtonType> scheduleDialog = new Dialog<>();
+                    scheduleDialog.setTitle("Schedule Pickup");
+                    scheduleDialog.setHeaderText("Enter pickup details");
+
+                    scheduleDialog.getDialogPane().getStyleClass().add("modern-dialog");
+                    scheduleDialog.getDialogPane().getStylesheets().add(
+                            getClass().getResource("/css/style.css").toExternalForm()
+                    );
+
+                    TextField timeField = new TextField();
+                    timeField.setPromptText("e.g. Sunday 2:00 PM");
+                    timeField.getStyleClass().add("dialog-input");
+
+                    ComboBox<String> locationBox = new ComboBox<>(FXCollections.observableArrayList(
+                            "FCIT Lobby",
+                            "Main Library",
+                            "Building 31 Entrance",
+                            "Student Center"
+                    ));
+                    locationBox.setPromptText("Select campus location");
+                    locationBox.getStyleClass().add("dialog-input");
+
+                    Label timeLabel = new Label("Pickup Time:");
+                    Label locationLabel = new Label("Campus Location:");
+
+                    timeLabel.getStyleClass().add("dialog-label");
+                    locationLabel.getStyleClass().add("dialog-label");
+
+                    GridPane grid = new GridPane();
+                    grid.getStyleClass().add("dialog-content");
+                    grid.setHgap(12);
+                    grid.setVgap(12);
+
+                    grid.addRow(0, timeLabel, timeField);
+                    grid.addRow(1, locationLabel, locationBox);
+
+                    scheduleDialog.getDialogPane().setContent(grid);
+                    scheduleDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+                    scheduleDialog.showAndWait().ifPresent(scheduleChoice -> {
+                        if (scheduleChoice == ButtonType.OK) {
+                            String pickupTime = timeField.getText().trim();
+                            String campusLocation = locationBox.getValue();
+
+                            if (pickupTime.isEmpty() || campusLocation == null || campusLocation.isEmpty()) {
+                                statusLabel.setText("Pickup time and location are required.");
+                                return;
+                            }
+
+                            request.schedulePickup(pickupTime, campusLocation);
+                            request.approve();
+                            statusLabel.setText("Request approved and pickup scheduled.");
+                        }
+                    });
+
+                } else if (choice == rejectBtn) {
+                    request.reject();
+                    statusLabel.setText("Request rejected.");
+                }
+            });
+        });
+    }
+
+    @FXML
+    private void viewMyRequests() {
+        User current = db.getLoggedUser();
+
+        if (current == null) {
+            statusLabel.setText("No logged in user.");
+            return;
+        }
+
+        java.util.List<ListingRequest> myRequests =
+                db.getRequestsByRequester(current.getUsername());
+
+        if (myRequests.isEmpty()) {
+            statusLabel.setText("You have not sent any requests.");
+            return;
+        }
+
+        ChoiceDialog<ListingRequest> dialog =
+                new ChoiceDialog<>(myRequests.get(0), myRequests);
+
+        dialog.setTitle("My Requests");
+        dialog.setHeaderText("طلباتك المرسلة");
+        dialog.setContentText("Select request:");
+
+        dialog.showAndWait().ifPresent(request -> {
+            Alert info = new Alert(Alert.AlertType.INFORMATION);
+            info.setTitle("Request Details");
+            info.setHeaderText("Request Status: " + request.getStatus());
+            info.setContentText(
+                    "Course: " + request.getListing().getCourseCode() + "\n" +
+                            "Owner: " + request.getOwnerUsername() + "\n" +
+                            "Requester: " + request.getRequesterUsername() + "\n" +
+                            "Status: " + request.getStatus() + "\n" +
+                            "Pickup Time: " + (request.getPickupTime() == null ? "-" : request.getPickupTime()) + "\n" +
+                            "Campus Location: " + (request.getCampusLocation() == null ? "-" : request.getCampusLocation()) + "\n" +
+                            "Summary: " + request.getListing().getSummary()
+            );
+            info.showAndWait();
+
+            statusLabel.setText("Showing your requests.");
+        });
     }
 }

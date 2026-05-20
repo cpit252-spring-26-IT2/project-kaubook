@@ -8,6 +8,7 @@ public class databaseManager {
     private List<User> users;
     private List<Listing> listings;
     private User loggedUser;
+    private List<ListingRequest> requests = new ArrayList<>();
    // private List<String> requests;
 
     private databaseManager (){
@@ -56,4 +57,23 @@ public class databaseManager {
     }
 
 
+    public void addRequest(ListingRequest request) {
+        requests.add(request);
+    }
+
+    public List<ListingRequest> getRequests() {
+        return requests;
+    }
+
+    public List<ListingRequest> getRequestsForOwner(String ownerUsername) {
+        return requests.stream()
+                .filter(r -> r.getOwnerUsername().equals(ownerUsername))
+                .toList();
+    }
+
+    public List<ListingRequest> getRequestsByRequester(String requesterUsername) {
+        return requests.stream()
+                .filter(r -> r.getRequesterUsername().equals(requesterUsername))
+                .toList();
+    }
 }
