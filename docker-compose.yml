@@ -1,0 +1,7 @@
+services:
+  kaubook-build:
+    build: .
+    container_name: kaubook-build
+    volumes:
+      - ./target:/app/target
+    command: mvn clean package -Dmaven.test.skip=true
