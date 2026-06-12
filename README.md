@@ -33,7 +33,29 @@ To build and run the app, use:
 
 ## Screenshots
 
+### Log In
+![Log In.png](screenshots%2FLog%20In.png)
 
+### Home Page
+![Home Page.png](screenshots%2FHome%20Page.png)
+
+### Create Listing
+![Create listing.png](screenshots%2FCreate%20listing.png)
+
+### Search Listing
+![Search Listing.png](screenshots%2FSearch%20Listing.png)
+
+### Borrow
+![Borrow.png](screenshots%2FBorrow.png)
+
+## Use of generative AI tools
+
+We have used ChatGPT, Claude only in understanding topics and give ideas on what tasks are better to start with and find debugs in the code.
+
+ChatGPT, 01/04/2026, "Explore this project proposal, and we want at start our program and code but can tell me what is the best creational design pattern we can implement with this project?"
+ChatGPt, 01/05/2026, "Which one of these backlog tasks we should do next you think? "
+ChatGPT, 12/05/2026, "This is our proposal. I want you to check it and understand the project and give me what is the best behavioral design pattern to implement, then explain your selection."
+Claude, 17/05/2026, "Review the project and tell me you see any mistakes."
 ## License
 
 Copyright © KAUBook Team
