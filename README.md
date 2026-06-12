@@ -48,6 +48,7 @@ To build and run the app, use:
 ### Borrow
 ![Borrow.png](screenshots%2FBorrow.png)
 
+
 ## Use of generative AI tools
 
 We have used ChatGPT, Claude only in understanding topics and give ideas on what tasks are better to start with and find debugs in the code.
