@@ -48,6 +48,18 @@ To build and run the app, use:
 ### Borrow
 ![Borrow.png](screenshots%2FBorrow.png)
 
+### Sending a Listing Request
+![Sending a Listing Request](Screenshots/request-sent.png)
+
+### Reviewing and Approving a Request
+![Reviewing and Approving a Request](Screenshots/review-approve.png)
+
+### Pickup Time and Location Selection
+![Pickup Time and Location Selection](Screenshots/pickup-time-location.png)
+
+### Approved Request with Pickup Details
+![Approved Request with Pickup Details](Screenshots/approved-request-details.png)
+
 
 ## Use of generative AI tools
 
@@ -57,6 +69,15 @@ We have used ChatGPT, Claude only in understanding topics and give ideas on what
 - ChatGPT, 01/05/2026, "Which one of these backlog tasks we should do next you think? "
 - ChatGPT, 12/05/2026, "This is our proposal. I want you to check it and understand the project and give me what is the best behavioral design pattern to implement, then explain your selection."
 - Claude, 17/05/2026, "Review the project and tell me you see any mistakes."
+
+## Additional Enhancements
+
+We improved the project by adding Docker, Docker Compose, and CI support.
+
+- **Docker / Docker Compose:** used to provide a consistent and portable build environment.
+- **CI with GitHub Actions:** used to automatically build the project whenever code is pushed, helping us verify that the project still works correctly.
+
+  
 ## License
 
 Copyright © KAUBook Team
