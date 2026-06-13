@@ -70,7 +70,7 @@ We have used ChatGPT, Claude only in understanding topics and give ideas on what
 - ChatGPT, 12/05/2026, "This is our proposal. I want you to check it and understand the project and give me what is the best behavioral design pattern to implement, then explain your selection."
 - Claude, 17/05/2026, "Review the project and tell me you see any mistakes."
 
-   ## Additional Enhancements
+## Extra credit
 
 We improved the project by adding Docker, Docker Compose, and CI support.
 
